@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicrons</title>
+     <!--Inter UI font-->
+     <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+
+     <!--vendors styles-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+ 
+     <!-- Bootstrap CSS / Color Scheme -->
+     <link rel="stylesheet" href="{% static 'styles/orange.css' %}" id="theme-color">
+     
+</head>
+<style>
+        /* width */
+    ::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #797a79;
+    border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #f89c11;}
+    #nav {
+    position: static;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000000;
+    background-color: #0c0c0c;
+    text-decoration: none;
+    padding: 16px 5%;
+    z-index: 999;
+    }
+
+    #logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 0;
+    margin: 0;
+    color: #ebe0e0;
+    }
+
+    @media (max-width: 640px) {
+        #logo span {
+            display: none;
+        }
+    }
+
+    #logo img {
+    height: 42px;
+    }
+
+    #nav a {
+    text-decoration: none;
+    }
+
+    #nav__links {
+    display: flex;
+    align-items: center;
+    column-gap: 2em;
+    }
+
+    .nav__link {
+    color: #fff;
+    text-decoration: none;
+    transition: 1s;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
+    padding-bottom: 1px;
+    }
+
+    @media (max-width: 520px) {
+        #nav__links {
+            column-gap: 3em;
+        }
+    }
+
+    .nav__link:hover {
+    color: rgb(230, 228, 228);
+    text-decoration: none;
+    border-color: #f89c11;
+    }
+
+    #create__room__btn {
+    display: block;
+    background-color: #f0680d;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    }
+
+    #create__room__btn:hover {
+    background-color: #f89c11;
+    }
+
+    .nav--list {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    }
+    #chat__button:hover svg,
+.nav__link:hover svg {
+  fill: #845695;
+}
+
+.nav__link svg {
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 640px) {
+  #members__button {
+    display: block;
+  }
+
+  .nav__link svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .nav__link,
+  #create__room__btn {
+    font-size: 0;
+    border: none;
+  }
+
+  #create__room__btn {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+
+  #create__room__btn:hover {
+    background-color: transparent;
+  }
+}
+.img{
+    animation: animate 3s linear infinite;
+}
+.img{
+    width: 50%;
+}
+@keyframes animate{
+    0%{
+        transform: translate(-11px, 0);
+    }
+    50%{
+        transform: translate(-0px, -11px);
+    }
+    100%{
+        transform: translate(-11px, 0);
+    }
+}
+
+</style>
+<body>
+    <header id="nav">
+        <div class="nav--list">
+             <a href="{% url 'front' %}">
+                 <h3 id="logo">
+                 
+                     <span>Vicrons</span>
+                 </h3>
+             </a>
+        </div>
+ 
+        <div id="nav__links">
+            <a class="nav__link" href="{% url 'index' %}">
+                 Join
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ede0e0" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg>
+            </a>
+            <a class="nav__link" id="create__room__btn" href="{% url 'index' %}">
+                 Create Room
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ede0e0" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="py-7 py-md-0 bg-hero" id="home">
+        <div class="container">
+            <div class="row vh-md-100">
+                <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                    <h1 class="heading-black text-capitalize">Make communication easier with Vicrons</h1>
+                    <p class="lead py-3">Its a free platform for peer learning or meets or even interview.
+                        Makes learning easy
+                    </p>
+                    <img class="img" src="{% static 'images/done.png'%}" alt=""> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- features section -->
+    <section class="pt-6 pb-7" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center">
+                    <h2 class="heading-black">It Offers Various Features</h2>
+                    <p class="text-muted lead">Vicrons makes lerning with peers very easy with these features.</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-10 mx-auto">
+                    <div class="row feature-boxes">
+                        <div class="col-md-6 box">
+                            <div class="icon-box box-primary">
+                                <div class="icon-box-inner">
+                                    <span data-feather="edit-3" width="35" height="35"></span>
+                                </div>
+                            </div>
+                            <h5>Real time chatting</h5>
+                            <p class="text-muted">It enanbles you to share share screen to make ur presentation or expaination easier
+                                .</p>
+                        </div>
+                        <div class="col-md-6 box">
+                            <div class="icon-box box-success">
+                                <div class="icon-box-inner">
+                                    <span data-feather="monitor" width="35" height="35"></span>
+                                </div>
+                            </div>
+                            <h5>Sharing of screen.</h5>
+                            <p class="text-muted">It enanbles you to share share screen to make ur presentation or expaination easier</p>
+                        </div>
+                        <div class="col-md-6 box">
+                            <div class="icon-box box-danger">
+                                <div class="icon-box-inner">
+                                    <span data-feather="layout" width="35" height="35"></span>
+                                </div>
+                            </div>
+                            <h5></h5>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in
+                                nisi commodo, tempus odio a, vestibulum nibh.</p>
+                        </div>
+                        <div class="col-md-6 box">
+                            <div class="icon-box box-info">
+                                <div class="icon-box-inner">
+                                    <span data-feather="globe" width="35" height="35"></span>
+                                </div>
+                            </div>
+                            <h5>Available globally</h5>
+                            <p class="text-muted">And it all available all round the world</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!--news section-->
+    <section class="py-7 bg-dark section-angle top-left bottom-left" id="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center">
+                    <h2 class="heading-black">VICRONS</h2>
+                    <p class="text-muted lead">What's can we use vicrons for exactly</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="#">
+                            <img class="card-img-top img-raised" src="{% static 'images/friends.jpg' %}" alt="Blog 1">
+                        </a>
+                        <div class="card-body">
+                            <a href="#" class="card-title mb-2"><h5>Connect With Loved Ones</h5></a>
+                            <p class="text-muted small-xl mb-2">Far away</p>
+                            <p class="card-text">It is a great platform to connect with ur loved ones dat are not near by</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="#">
+                            <img class="card-img-top img-raised" src="{% static 'images/business.jpg' %}" alt="Blog 2">
+                        </a>
+                        <div class="card-body">
+                            <a href="#" class="card-title mb-2"><h5>Business Meetings</h5></a>
+                            <p class="text-muted small-xl mb-2">Interviews</p>
+                            <p class="card-text">It is a great platform for business meetings to take place from any location in the world</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <a href="#">
+                            <img class="card-img-top img-raised" src="{% static 'images/learn.png' %}" alt="Blog 3">
+                        </a>
+                        <div class="card-body">
+                            <a href="#" class="card-title mb-2"><h5>Learning</h5></a>
+                            <p class="text-muted small-xl mb-2">very simple</p>
+                            <p class="card-text">It a great platform to learn with peers and to be taugt</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--footer-->
+    <footer class="py-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 mr-auto">
+                    <h5>About Vicrons</h5>
+                    <p class="text-muted">it is a platform which make interaction easy and helps in various ways.
+                        It just a really great web app.
+                    </p>
+                    <ul class="list-inline social social-sm">
+                        <li class="list-inline-item">
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href=""><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href=""><i class="fa fa-dribbble"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <h5>Help</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Log in</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--scroll to top-->
+    <div class="scroll-top">
+        <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
